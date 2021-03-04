@@ -5,13 +5,13 @@ class Comment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   text: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn('timestamp with time zone')
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn('timestamp with time zone')
   updated_at: Date;
 }
 

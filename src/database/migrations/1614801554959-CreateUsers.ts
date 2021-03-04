@@ -52,6 +52,10 @@ export class CreateUsers1614801554959 implements MigrationInterface {
               type: 'timestamp with time zone'
             },
             {
+              name: 'address_id',
+              type: 'uuid'
+            },
+            {
               name: 'created_at',
               type: 'timestamp with time zone',
               default: 'now()',
@@ -68,7 +72,7 @@ export class CreateUsers1614801554959 implements MigrationInterface {
         'users',
         new TableForeignKey({
           name: 'user_address',
-          columnNames: ['id'],
+          columnNames: ['address_id'],
           referencedColumnNames: ['id'],
           referencedTableName: 'address',
           onDelete: 'SET NULL',

@@ -5,16 +5,16 @@ class Address {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   city: string;
 
-  @Column()
+  @Column('varchar')
   state: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn('timestamp with time zone')
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn('timestamp with time zone')
   updated_at: Date;
 }
 
