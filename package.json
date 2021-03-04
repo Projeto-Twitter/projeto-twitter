@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsc",
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore node_modules src/server.ts",
-    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "test": "ts-node-dev --inspect --transpile-only --ignore node_modules src/server.ts"
   },
   "dependencies": {
     "@types/express": "^4.17.11",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@types/node": "^14.14.31",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
