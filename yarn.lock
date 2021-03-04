@@ -568,6 +568,14 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
+custom-env@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/custom-env/-/custom-env-2.0.1.tgz#30afaf5200f43aa86731f81576387f5d2af2c51b"
+  integrity sha512-gVv19DBDuTQ8MM/WPlf8025Aa46Aqmfrr/kDxyDfXWe5t7C3+OgBsuhrsXTKQ4hGo+z1OuuaOQnhgTWIpvrz+w==
+  dependencies:
+    dotenv "*"
+    dotenv-expand "^5.0.0"
+
 dateformat@~1.0.4-1.2.3:
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-1.0.12.tgz#9f124b67594c937ff706932e4a642cca8dbbfee9"
@@ -636,7 +644,12 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-dotenv@^8.2.0:
+dotenv-expand@^5.0.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
+  integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
+
+dotenv@*, dotenv@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
