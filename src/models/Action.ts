@@ -3,7 +3,7 @@ import User from './User';
 import Comment from './Comment';
 import Tweet from './Tweet';
 @Entity('actions')
-class Actions {
+class Action {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -29,11 +29,11 @@ class Actions {
   tweet: Tweet;
 
 
-  @CreateDateColumn('timestamp with time zone')
+  @CreateDateColumn({ type: 'timestamp with time zone'})
   created_at: Date;
 
-  @UpdateDateColumn('timestamp with time zone')
+  @UpdateDateColumn({ type: 'timestamp with time zone'})
   updated_at: Date;
 }
 
-export default Actions;
+export default Action;

@@ -40,10 +40,10 @@ class User {
   @JoinTable({ name: 'address_id'})
   address: Address;
 
-  @CreateDateColumn('timestamp with time zone')
+  @CreateDateColumn({ type: 'timestamp with time zone'})
   created_at: Date;
 
-  @UpdateDateColumn('timestamp with time zone')
+  @UpdateDateColumn({ type: 'timestamp with time zone'})
   updated_at: Date;
 }
 
