@@ -1,28 +1,38 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, JoinColumn, ManyToMany} from 'typeorm';
-import Tweet from './Tweet';
+import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinTable} from 'typeorm';
 import User from './User';
-
+import Comment from './Comment';
+import Tweet from './Tweet';
 @Entity('actions')
 class Actions {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToMany(() => User)
-  @JoinColumn({name: 'id'})
+  @Column('uuid')
+  user_id: string;
+
+  @ManyToOne(()=> User)
+  @JoinTable({ name: 'address_id'})
   user: User;
 
-  @ManyToMany(() => Comment)
-  @JoinColumn({name: 'id'})
-  comments: Comment;
+  @Column('uuid')
+  comment_id: string;
 
-  @ManyToMany(() => Tweet)
-  @JoinColumn({name: 'id'})
-  tweets: Tweet;
+  @ManyToOne(()=> Comment)
+  @JoinTable({ name: 'comment_id'})
+  comment: Comment;
 
-  @CreateDateColumn()
+  @Column('uuid')
+  tweet_id: string;
+
+  @ManyToOne(()=> Tweet)
+  @JoinTable({ name: 'tweet_id'})
+  tweet: Tweet;
+
+
+  @CreateDateColumn('timestamp with time zone')
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn('timestamp with time zone')
   updated_at: Date;
 }
 

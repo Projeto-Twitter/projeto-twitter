@@ -5,19 +5,19 @@ class Tweet {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  likes_amount: BigInt;
+  @Column('int8')
+  likes_amount: number;
 
-  @Column()
-  retweets_amount: BigInt;
+  @Column('int8')
+  retweets_amount: number;
 
-  @Column()
-  answer_amount: BigInt;
+  @Column('int8')
+  answer_amount: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn('timestamp with time zone')
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn('timestamp with time zone')
   updated_at: Date;
 }
 

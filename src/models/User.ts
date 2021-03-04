@@ -1,46 +1,49 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn} from 'typeorm';
-import Address from './Action';
+import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinTable} from 'typeorm';
+import Address from './Address';
 
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   username: string;
 
-  @Column()
+  @Column('varchar')
   name: string;
 
-  @Column()
+  @Column('varchar')
   email: string;
 
-  @Column()
+  @Column('varchar')
   password: string;
 
-  @Column()
+  @Column('varchar')
   phone: string;
 
-  @Column()
+  @Column('timestamp with time zone')
   subscription_date: Date;
 
-  @Column()
+  @Column('int8')
   followers_amount: BigInt;
 
-  @Column()
+  @Column('int8')
   following_amount: BigInt;
 
-  @Column()
+  @Column('timestamp with time zone')
   born: Date;
 
-  @ManyToOne(() => Address)
-  @JoinColumn({ name: 'id' })
-  provider: Address;
+  @Column()
+  address_id: string;
 
-  @CreateDateColumn()
+  @OneToOne(()=> Address)
+  @JoinTable({ name: 'address_id'})
+  address: Address;
+
+  @CreateDateColumn('timestamp with time zone')
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn('timestamp with time zone')
   updated_at: Date;
 }
 

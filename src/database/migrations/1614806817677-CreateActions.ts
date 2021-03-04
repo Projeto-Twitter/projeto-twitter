@@ -14,6 +14,18 @@ export class CreateActions1614806817677 implements MigrationInterface {
               generationStrategy: 'uuid',
             },
             {
+              name: 'user_id',
+              type: 'uuid',
+            },
+            {
+              name: 'comment_id',
+              type: 'uuid',
+            },
+            {
+              name: 'tweet_id',
+              type: 'uuid',
+            },
+            {
               name: 'created_at',
               type: 'timestamp with time zone',
               default: 'now()',
@@ -31,7 +43,7 @@ export class CreateActions1614806817677 implements MigrationInterface {
         'actions',
         new TableForeignKey({
           name: 'user',
-          columnNames: ['id'],
+          columnNames: ['user_id'],
           referencedColumnNames: ['id'],
           referencedTableName: 'users',
           onDelete: 'SET NULL',
@@ -42,8 +54,8 @@ export class CreateActions1614806817677 implements MigrationInterface {
       await queryRunner.createForeignKey(
         'actions',
         new TableForeignKey({
-          name: 'comments',
-          columnNames: ['id'],
+          name: 'comment',
+          columnNames: ['comment_id'],
           referencedColumnNames: ['id'],
           referencedTableName: 'comments',
           onDelete: 'SET NULL',
@@ -54,8 +66,8 @@ export class CreateActions1614806817677 implements MigrationInterface {
       await queryRunner.createForeignKey(
         'actions',
         new TableForeignKey({
-          name: 'tweets',
-          columnNames: ['id'],
+          name: 'tweet',
+          columnNames: ['tweet_id'],
           referencedColumnNames: ['id'],
           referencedTableName: 'tweets',
           onDelete: 'SET NULL',
@@ -65,8 +77,8 @@ export class CreateActions1614806817677 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.dropForeignKey('actions', 'tweets');
-      await queryRunner.dropForeignKey('actions', 'comments');
+      await queryRunner.dropForeignKey('actions', 'tweet');
+      await queryRunner.dropForeignKey('actions', 'comment');
       await queryRunner.dropForeignKey('actions', 'user');
       await queryRunner.dropTable('users');
     }
