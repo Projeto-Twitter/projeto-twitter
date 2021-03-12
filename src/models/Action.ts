@@ -11,7 +11,7 @@ class Action {
   user_id: string;
 
   @ManyToOne(()=> User)
-  @JoinTable({ name: 'address_id'})
+  @JoinTable({ name: 'user_id'})
   user: User;
 
   @Column('uuid')
