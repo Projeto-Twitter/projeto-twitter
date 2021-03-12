@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+import 'reflect-metadata';
+import './database';
 import express, {Request, Response, NextFunction} from 'express';
 import 'express-async-errors';
 import router from './routes/index';
