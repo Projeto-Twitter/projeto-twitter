@@ -9,7 +9,6 @@ interface Request {
   email: string;
   password: string;
   phone: string;
-  addressId: string;
   born: Date;
 }
 
@@ -17,19 +16,27 @@ interface Request {
 
 
 class CreateUserService {
-  public async execute({name, email, phone, password, addressId, born }: Request): Promise<User> {
+  public async execute({name, email, phone, password, born }: Request): Promise<User> {
     const userRepository = getRepository(User);
-
     const usernameHash = await hash(name,4);
-
     const userName = name + usernameHash;
 
-    const checkUser = await userRepository.findOne({
-      where: {email}
-    });
+    if (email) {
+      const checkUser = await userRepository.findOne({
+        where: {email}
+      });
 
-    if (checkUser) {
-      throw new AppError('User email already exists', 400);
+      if (checkUser) {
+        throw new AppError('User email already exists', 400);
+      }
+    } else {
+      const checkUser = await userRepository.findOne({
+        where: {phone}
+      });
+
+      if (checkUser) {
+        throw new AppError('User email already exists', 400);
+      }
     }
 
     if( !born ){
@@ -38,16 +45,12 @@ class CreateUserService {
 
     const hashedPassword = await hash(password, 8);
 
-
     const user = userRepository.create({
       name,
       email,
       password: hashedPassword,
       phone,
-      address_id: addressId,
       username: userName,
-      followers_amount: 0,
-      following_amount: 0,
       born,
     });
     await userRepository.save(user);
