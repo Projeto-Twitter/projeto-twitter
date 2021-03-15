@@ -21,9 +21,6 @@ class User {
   @Column('varchar')
   phone: string;
 
-  @Column('timestamp with time zone')
-  subscription_date: Date;
-
   @Column('int8')
   followers_amount: BigInt;
 
