@@ -36,11 +36,13 @@ class CreateUserService {
       throw new AppError('data de nascimento inválida');
     }
 
+    const hashedPassword = await hash(password, 8);
+
 
     const user = userRepository.create({
       name,
       email,
-      password,
+      password: hashedPassword,
       phone,
       address_id: addressId,
       username: userName,
