@@ -10,24 +10,12 @@ usersRouter.post('/', async (request, response) => {
     email,
     password,
     phone,
-    cityName,
-    stateName,
     born
   } = request.body;
 
-  const findAddressService = new FindAddressService();
   const createUserService = new CreateUserService();
-  const createAddressService = new CreateAddressService();
 
-  const address = await findAddressService.execute({city: cityName, state: stateName});
-
-  if (!address) {
-    const newAddress = await createAddressService.execute({city: cityName, state: stateName});
-    const user = await createUserService.execute({ name, email, phone, password, addressId: newAddress.id, born});
-    return response.status(200).json(user);
-  }
-
-  const user = await createUserService.execute({ name, email, phone, password, addressId: address.id, born})
+  const user = await createUserService.execute({ name, email, phone, password, born});
 
   return response.status(200).json(user);
 
