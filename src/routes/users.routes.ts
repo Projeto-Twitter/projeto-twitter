@@ -1,7 +1,8 @@
 import { Router } from 'express';
-import FindAddressService from '../services/FindAddressService';
+import { getRepository } from 'typeorm';
 import CreateUserService from '../services/CreateUsersService';
-import CreateAddressService from '../services/CreateAddressService';
+import UpdateUserService from '../services/UpdateUserService';
+import User from '../models/User';
 const usersRouter = Router();
 
 usersRouter.post('/', async (request, response) => {
@@ -12,18 +13,40 @@ usersRouter.post('/', async (request, response) => {
     phone,
     born
   } = request.body;
-
   const createUserService = new CreateUserService();
-
   const user = await createUserService.execute({ name, email, phone, password, born});
 
   return response.status(200).json(user);
-
 });
 
 
-usersRouter.get('/', (request, response)=> {
+usersRouter.get('/:id', (request, response)=> {
+  const { id } = request.params;
+  const userRepository = getRepository(User);
+  const user = userRepository.findOne({
+    where: {id}
+  });
+  if (!user) {
+    return response.status(400).json('User not found');
+  }
 
+  return response.status(200).json(user);
+});
+
+usersRouter.put('/:id', async (request, response) => {
+  const { id } = request.params;
+  const data = request.body;
+  data.userId = id;
+  const updateUserService = new UpdateUserService();
+
+  const user = await updateUserService.execute({
+    id: data.userId,
+    email: data.email,
+    name: data.name,
+    phone: data.phone,
+  });
+
+  return response.status(200).json(user);
 });
 
 export default usersRouter;
@@ -37,5 +60,11 @@ export default usersRouter;
 // criar o user
 // retornar o user
 
-
-// rota de criacao do usuario NAO deve ter validacao da existencia do endereco!!!!!!!!!
+/***
+ *   id: string;
+  name: string;
+  email: string;
+  phone: string;
+  cityName: string;
+  stateName: string;
+ */
