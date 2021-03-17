@@ -1,5 +1,8 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
 build:
-  build: yarn build
-
-run:
-  web: yarn dist/server.js
+    docker:
+      web: Dockerfile
+run: yarn start
