@@ -5,4 +5,5 @@ setup:
 build:
     docker:
       web: Dockerfile
-run: "yarn start"
+run:
+  web: yarn start
