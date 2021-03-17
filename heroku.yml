@@ -1,0 +1,5 @@
+build:
+  build: yarn build
+
+run:
+  web: yarn dist/server.js
