@@ -1,2 +1,2 @@
-web: yarn build | node dist/server.js
-
+build: npm build
+web: npm dist/server.js
