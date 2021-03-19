@@ -13,7 +13,7 @@
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore node_modules src/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "ts-node-dev --inspect --transpile-only --ignore node_modules src/server.ts",
-    "start": "node dist/server.js"
+    "start": "node /usr/src/app/dist/server.js"
   },
   "dependencies": {
     "@types/cors": "^2.8.10",
