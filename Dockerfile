@@ -16,7 +16,9 @@ RUN yarn
 # COPY . .
 COPY . /usr/src/app
 
+RUN yarn build
+
 
 EXPOSE 3333
 
-CMD ["yarn", "build"]
+CMD ["yarn", "start"]
