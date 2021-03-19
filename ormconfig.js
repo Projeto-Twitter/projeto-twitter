@@ -11,7 +11,8 @@ module.exports = {
   "extra": {
     "ssl": {
       "rejectUnauthorized": false
-    },
+    }
+  },
   "entities": [
     "./src/models/*.ts"
   ],
