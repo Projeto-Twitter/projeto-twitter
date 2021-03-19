@@ -17,7 +17,6 @@ RUN yarn
 COPY . /usr/src/app
 
 RUN yarn build
-RUN yarn start
 
 
 EXPOSE 3333
