@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev:server": "ts-node-dev --inspect --transpile-only --ignore node_modules src/server.ts",
+    "dev:server": "ts-node-dev --inspect --trace-warnings --transpile-only --ignore node_modules src/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "ts-node-dev --inspect --transpile-only --ignore node_modules src/server.ts",
     "start": "node /usr/src/app/dist/server.js"
