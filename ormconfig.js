@@ -7,12 +7,12 @@ module.exports = {
   "username": process.env.DATABASE_USER,
   "password": process.env.DATABASE_PASSWORD,
   "database": process.env.DATABASE_DATABASE,
-  // "ssl": true,
-  // "extra": {
-  //   "ssl": {
-  //     "rejectUnauthorized": false
-  //   }
-  // },
+  "ssl": true,
+  "extra": {
+    "ssl": {
+      "rejectUnauthorized": false
+    }
+  },
   "entities": [
     "./dist/models/*.js"
   ],
