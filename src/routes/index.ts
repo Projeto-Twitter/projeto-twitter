@@ -5,8 +5,8 @@ import commentsRouter from './comments.routes';
 
 const router = express.Router();
 
-router.get('/',(request, response) => {
-  return response.status(200).send('Welcome to our fake twitter server')
+router.get('/', (request, response) => {
+  return response.status(200).send('Welcome to our fake twitter server');
 });
 
 router.use('/users', usersRouter);
