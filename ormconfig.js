@@ -14,12 +14,12 @@ module.exports = {
   //   }
   // },
   "entities": [
-    "./src/models/*.ts"
+    "./dist/models/*.js"
   ],
   "migrations": [
-    "./src/database/migrations/*.ts"
+    "./dist/database/migrations/*.js"
   ],
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": "./dist/database/migrations"
   }
 }
