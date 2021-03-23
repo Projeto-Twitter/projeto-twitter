@@ -1,7 +1,8 @@
-import { Router } from 'express';
+import { response, Router } from 'express';
 import { getRepository } from 'typeorm';
 import CreateUserService from '../services/CreateUsersService';
 import UpdateUserService from '../services/UpdateUserService';
+import FindSugestionsService from '../services/FindSugesionsService';
 import User from '../models/User';
 import ensureAuthenticated from '../middlewares/ensureAuthentication';
 
@@ -32,6 +33,15 @@ usersRouter.get('/:id', (request, response) => {
   }
 
   return response.status(200).json(user);
+});
+
+usersRouter.get('/sugestion', ensureAuthenticated, async (request, responsde)=> {
+  const userId = request.user.id;
+  const findSugestionsService = new FindSugestionsService();
+
+  const sugestions = await findSugestionsService.execute({userId});
+
+  return response.status(200).json(sugestions);
 });
 
 usersRouter.put('/:id', ensureAuthenticated, async (request, response) => {
