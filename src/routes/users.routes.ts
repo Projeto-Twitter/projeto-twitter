@@ -34,6 +34,19 @@ usersRouter.get('/:id', (request, response) => {
   return response.status(200).json(user);
 });
 
+usersRouter.get('/:id', (request, response) => {
+  const { id } = request.params;
+  const userRepository = getRepository(User);
+  const user = userRepository.findOne({
+    where: { id },
+  });
+  if (!user) {
+    return response.status(400).json('User not found');
+  }
+
+  return response.status(200).json(user);
+});
+
 usersRouter.put('/:id', ensureAuthenticated, async (request, response) => {
   const { id } = request.params;
   const data = request.body;
