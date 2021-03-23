@@ -35,10 +35,10 @@ if (process.env.ENV == 'development') {
     "password": process.env.DATABASE_PASSWORD,
     "database": process.env.DATABASE_DATABASE,
     "entities": [
-      "./src/models/*.js"
+      "./src/models/*.ts"
     ],
     "migrations": [
-      "./src/database/migrations/*.js"
+      "./src/database/migrations/*.ts"
     ],
     "cli": {
       "migrationsDir": "./src/database/migrations"
