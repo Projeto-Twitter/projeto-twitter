@@ -1,4 +1,13 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinTable} from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinTable,
+} from 'typeorm';
+
 import Address from './Address';
 
 @Entity('users')
@@ -33,14 +42,14 @@ class User {
   @Column()
   address_id: string;
 
-  @OneToOne(()=> Address)
-  @JoinTable({ name: 'address_id'})
+  @ManyToOne(() => Address)
+  @JoinTable({ name: 'address_id' })
   address: Address;
 
-  @CreateDateColumn({ type: 'timestamp with time zone'})
+  @CreateDateColumn({ type: 'timestamp with time zone' })
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'timestamp with time zone'})
+  @UpdateDateColumn({ type: 'timestamp with time zone' })
   updated_at: Date;
 }
 

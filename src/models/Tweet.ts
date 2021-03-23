@@ -1,4 +1,14 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn} from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+  JoinTable,
+} from 'typeorm';
+
+import User from './User';
 
 @Entity('tweets')
 class Tweet {
@@ -14,10 +24,17 @@ class Tweet {
   @Column('int8')
   answer_amount: number;
 
-  @CreateDateColumn({ type: 'timestamp with time zone'})
+  @Column()
+  user_id: string;
+
+  @ManyToOne(() => User)
+  @JoinTable({ name: 'user_id' })
+  user: User;
+
+  @CreateDateColumn({ type: 'timestamp with time zone' })
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'timestamp with time zone'})
+  @UpdateDateColumn({ type: 'timestamp with time zone' })
   updated_at: Date;
 }
 

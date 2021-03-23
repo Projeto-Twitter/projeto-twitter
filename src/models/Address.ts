@@ -1,6 +1,12 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn} from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-@Entity('address')
+@Entity('adresses')
 class Address {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -11,10 +17,10 @@ class Address {
   @Column('varchar')
   state: string;
 
-  @CreateDateColumn({ type: 'timestamp with time zone'})
+  @CreateDateColumn({ type: 'timestamp with time zone' })
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'timestamp with time zone',})
+  @UpdateDateColumn({ type: 'timestamp with time zone' })
   updated_at: Date;
 }
 
