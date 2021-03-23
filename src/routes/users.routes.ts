@@ -3,28 +3,29 @@ import { getRepository } from 'typeorm';
 import CreateUserService from '../services/CreateUsersService';
 import UpdateUserService from '../services/UpdateUserService';
 import User from '../models/User';
+import ensureAuthenticated from '../middlewares/ensureAuthentication';
+
 const usersRouter = Router();
 
 usersRouter.post('/', async (request, response) => {
-  const {
+  const { name, email, password, phone, born } = request.body;
+  const createUserService = new CreateUserService();
+  const user = await createUserService.execute({
     name,
     email,
-    password,
     phone,
-    born
-  } = request.body;
-  const createUserService = new CreateUserService();
-  const user = await createUserService.execute({ name, email, phone, password, born});
+    password,
+    born,
+  });
 
   return response.status(200).json(user);
 });
 
-
-usersRouter.get('/:id', (request, response)=> {
+usersRouter.get('/:id', (request, response) => {
   const { id } = request.params;
   const userRepository = getRepository(User);
   const user = userRepository.findOne({
-    where: {id}
+    where: { id },
   });
   if (!user) {
     return response.status(400).json('User not found');
@@ -33,7 +34,7 @@ usersRouter.get('/:id', (request, response)=> {
   return response.status(200).json(user);
 });
 
-usersRouter.put('/:id', async (request, response) => {
+usersRouter.put('/:id', ensureAuthenticated, async (request, response) => {
   const { id } = request.params;
   const data = request.body;
   data.userId = id;
@@ -60,7 +61,7 @@ export default usersRouter;
 // criar o user
 // retornar o user
 
-/***
+/** *
  *   id: string;
   name: string;
   email: string;

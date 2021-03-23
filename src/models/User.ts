@@ -5,7 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  JoinTable,
+  JoinColumn,
 } from 'typeorm';
 
 import Address from './Address';
@@ -43,7 +43,7 @@ class User {
   address_id: string;
 
   @ManyToOne(() => Address)
-  @JoinTable({ name: 'address_id' })
+  @JoinColumn({ name: 'address_id' })
   address: Address;
 
   @CreateDateColumn({ type: 'timestamp with time zone' })
