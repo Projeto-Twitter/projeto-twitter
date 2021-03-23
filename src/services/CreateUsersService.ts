@@ -1,8 +1,7 @@
 import { getRepository } from 'typeorm';
+import { hash } from 'bcryptjs';
 import User from '../models/User';
 import AppError from '../errors/AppError';
-import { hash } from 'bcryptjs';
-import UsersRepository from 'src/repositories/UsersRepository';
 
 interface Request {
   name: string;
@@ -12,18 +11,21 @@ interface Request {
   born: Date;
 }
 
-
-
-
 class CreateUserService {
-  public async execute({name, email, phone, password, born }: Request): Promise<User> {
+  public async execute({
+    name,
+    email,
+    phone,
+    password,
+    born,
+  }: Request): Promise<User> {
     const userRepository = getRepository(User);
-    const usernameHash = await hash(name,4);
-    const userName = name + usernameHash;
+    const usernameHash = await hash(name, 1);
+    const userName = name + '@' + usernameHash.substr(0,6);
 
     if (email) {
       const checkUser = await userRepository.findOne({
-        where: {email}
+        where: { email },
       });
 
       if (checkUser) {
@@ -31,7 +33,7 @@ class CreateUserService {
       }
     } else {
       const checkUser = await userRepository.findOne({
-        where: {phone}
+        where: { phone },
       });
 
       if (checkUser) {
@@ -39,7 +41,7 @@ class CreateUserService {
       }
     }
 
-    if( !born ){
+    if (!born) {
       throw new AppError('data de nascimento inválida');
     }
 
@@ -56,10 +58,9 @@ class CreateUserService {
     await userRepository.save(user);
 
     // @ts-expect-error Aqui vai ocorrer um erro, mas estou ignorando
-    delete(user.password);
+    delete user.password;
 
     return user;
-
   }
 }
 

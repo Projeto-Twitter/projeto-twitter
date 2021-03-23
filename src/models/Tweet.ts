@@ -5,7 +5,7 @@ import {
   ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
-  JoinTable,
+  JoinColumn,
 } from 'typeorm';
 
 import User from './User';
@@ -28,7 +28,7 @@ class Tweet {
   user_id: string;
 
   @ManyToOne(() => User)
-  @JoinTable({ name: 'user_id' })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @CreateDateColumn({ type: 'timestamp with time zone' })

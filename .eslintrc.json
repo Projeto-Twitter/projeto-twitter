@@ -34,7 +34,7 @@
     "@typescript-eslint/naming-convention": [
       "error",
       {
-        "selector": "interface",
+        // "selector": "interface",
         "prefix": ["I"],
         "format": ["PascalCase"]
       }
