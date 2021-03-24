@@ -1,12 +1,17 @@
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
 
+import User from '../models/User';
+
 import CreateUserService from '../services/CreateUsersService';
 import UpdateUserService from '../services/UpdateUserService';
 import FindSugestionsService from '../services/FindSugesionsService';
 import SearchUsersService from '../services/SearchUsersService';
 
 import ensureAuthenticated from '../middlewares/ensureAuthentication';
+import email from '../emails/Mail';
+const emailService = email();
+
 
 const usersRouter = Router();
 
@@ -60,6 +65,25 @@ usersRouter.put('/:id', ensureAuthenticated, async (request, response) => {
 
   return response.status(200).json(user);
 });
+
+usersRouter.get('/forgot-password', ensureAuthenticated, async (request, response) => {
+
+  const { email } = request.body;
+  const usersRepository = getRepository(User);
+
+  const user = await usersRepository.findOne({
+    where: {email}
+  });
+
+  if (!user){
+    return response.status(400).json('this user does not exists');
+  }
+
+  await emailService.emailForForgotPassword('', user.password, user.email);
+
+  return response.status(200).json('password was send to user email');
+
+})
 
 export default usersRouter;
 
