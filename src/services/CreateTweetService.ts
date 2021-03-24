@@ -22,7 +22,7 @@ class CreateTweetService {
       throw new AppError('Can not create a tweet without a text');
     }
 
-    const tweet = tweetsRepository.create({user_id: userId});
+    const tweet = tweetsRepository.create({users_id: userId});
     const comment = commentsRepository.create({tweets_id: tweet.id, text});
     await commentsRepository.save(comment);
     await tweetsRepository.save(tweet);
