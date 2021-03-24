@@ -11,7 +11,7 @@ tweetsRouter.get('/', ensureAuthenticated, async (request, response)=> {
   const findTweetsService = new FindTweetsService();
 
   const userId = request.user.id;
-  const tweets = findTweetsService.execute({ userId });
+  const tweets = await findTweetsService.execute({ userId });
 
   return response.status(200).json(tweets);
 });

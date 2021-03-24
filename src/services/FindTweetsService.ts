@@ -10,7 +10,7 @@ class FindTweetsService {
   public async execute({ userId }: Request): Promise<Tweet[]|undefined> {
     const tweetsRepository = getRepository(Tweet);
     const tweets = await tweetsRepository.find({
-      where: {user_id: userId}
+      where: {users_id: userId}
     });
 
     if (!tweets) {
