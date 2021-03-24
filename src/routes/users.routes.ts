@@ -1,9 +1,11 @@
-import { response, Router } from 'express';
+import { Router } from 'express';
 import { getRepository } from 'typeorm';
+
 import CreateUserService from '../services/CreateUsersService';
 import UpdateUserService from '../services/UpdateUserService';
 import FindSugestionsService from '../services/FindSugesionsService';
-import User from '../models/User';
+import SearchUsersService from '../services/SearchUsersService';
+
 import ensureAuthenticated from '../middlewares/ensureAuthentication';
 
 const usersRouter = Router();
@@ -22,20 +24,19 @@ usersRouter.post('/', async (request, response) => {
   return response.status(200).json(user);
 });
 
-usersRouter.get('/:id', (request, response) => {
-  const { id } = request.params;
-  const userRepository = getRepository(User);
-  const user = userRepository.findOne({
-    where: { id },
-  });
-  if (!user) {
-    return response.status(400).json('User not found');
-  }
+//
+usersRouter.get('/', ensureAuthenticated, async (request, response) => {
+  const { name, username } = request.body;
 
-  return response.status(200).json(user);
+  const searchUsersService = new SearchUsersService();
+
+  const users = await searchUsersService.execute({name,username});
+
+  return response.status(200).json(users);
+
 });
 
-usersRouter.get('/sugestion', ensureAuthenticated, async (request, responsde)=> {
+usersRouter.get('/sugestion', ensureAuthenticated, async (request, response)=> {
   const userId = request.user.id;
   const findSugestionsService = new FindSugestionsService();
 
