@@ -16,19 +16,19 @@ class Tweet {
   id: string;
 
   @Column('int8')
-  likes_amount: number;
+  likes: number;
 
   @Column('int8')
-  retweets_amount: number;
+  retweets: number;
 
   @Column('int8')
-  answer_amount: number;
+  answers: number;
 
   @Column()
-  user_id: string;
+  users_id: string;
 
   @ManyToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn({ name: 'users_id' })
   user: User;
 
   @CreateDateColumn({ type: 'timestamp with time zone' })
